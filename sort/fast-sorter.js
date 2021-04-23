@@ -39,7 +39,7 @@ class FastSorter {
         this.sort(items, left, index - 1);
       }
       if (index < right) {
-        this.sort(items, index, right);
+        this.sort(items, index + 1, right);
       }
     }
     return items;

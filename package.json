@@ -1,9 +1,10 @@
 {
   "name": "zadachki",
   "scripts": {
-    "test": "mocha */test.js"
+    "test": "mocha */test.js",
+    "start": "node sort/fast-sorter.js"
   },
   "devDependencies": {
-    "mocha": "~8.2.1"
+    "mocha": "^8.2.1"
   }
 }
