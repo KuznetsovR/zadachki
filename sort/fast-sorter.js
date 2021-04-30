@@ -29,17 +29,20 @@ class FastSorter {
     this.comp = comp;
   }
 
-  sort(items) {
+  sort(items, left, right) {
     let index;
-    let left = 0;
-    let right = items.length - 1;
+    if (left===undefined&&right===undefined){
+      left = 0;
+      right = items.length - 1;
+      items = items.slice();
+    }
     if (items.length > 1) {
       index = partition(items, left, right, this.comp);
       if (left < index - 1) {
         this.sort(items, left, index - 1);
       }
       if (index < right) {
-        this.sort(items, index + 1, right);
+        this.sort(items, index, right);
       }
     }
     return items;
