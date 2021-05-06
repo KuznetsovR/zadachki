@@ -91,6 +91,7 @@ class HashTable {
       ceil.add(element);
     }
   }
+  
   get(key) {
     const index = hash(key, this.size);
     const ceil = this.table[index];
@@ -101,6 +102,7 @@ class HashTable {
     if (!item) return undefined;
     return item[1];
   }
+
   remove(key) {
     const index = hash(key, this.size);
     const ceil = this.table[index];
@@ -115,6 +117,7 @@ class HashTable {
       this.table[index] = undefined;
     }
   }
+
   static from(iterable) {
     const newMap = new HashTable();
     for (let i = 0; i < iterable.length; i++) {
