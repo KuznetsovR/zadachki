@@ -76,22 +76,21 @@ class HashTable {
   set(key, value) {
     const index = hash(key, this.size);
     if (this.table[index] === undefined) {
-        this.table[index] = new List();
-
+      this.table[index] = new List();
     }
     const ceil = this.table[index];
-    
+
     const item = ceil.find((item) => item[0] === key);
     if (item) {
-      item[1] = value; 
+      item[1] = value;
     } else {
-      let element = new Array(2); 
+      let element = new Array(2);
       element[0] = key;
       element[1] = value;
       ceil.add(element);
     }
   }
-  
+
   get(key) {
     const index = hash(key, this.size);
     const ceil = this.table[index];
@@ -111,7 +110,7 @@ class HashTable {
       return;
     }
 
-    const removed = ceil.findAndRemove((item) => item[0] === key);
+    ceil.findAndRemove((item) => item[0] === key);
 
     if (ceil.isEmpty()) {
       this.table[index] = undefined;
@@ -121,17 +120,32 @@ class HashTable {
   static from(iterable) {
     const newMap = new HashTable();
     for (let i = 0; i < iterable.length; i++) {
-
       if (isArray(iterable[i])) {
-          newMap.set(iterable[i][0], iterable[i][1])
-
+        newMap.set(iterable[i][0], iterable[i][1]);
       } else if (typeof iterable[i] === "object") {
-            newMap.set(iterable[i].key, iterable[i].value)
-
+        newMap.set(iterable[i].key, iterable[i].value);
       } else throw Error;
     }
     // console.log(newMap)
     return newMap;
+  }
+  [Symbol.iterator]() {
+    return {
+      i: 0,
+      next() {
+        if (this.i < this.size) {
+          this.i++;
+          const list = this.table[this.i];
+          if (!list) return;
+          const item = list.head;
+          do {
+            return { value: item.data, done: false };
+            item = item.next;
+          } while (item);
+        }
+        return { value: undefined, done: true };
+      },
+    };
   }
 }
 
