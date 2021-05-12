@@ -129,24 +129,25 @@ class HashTable {
     // console.log(newMap)
     return newMap;
   }
+  
   [Symbol.iterator]() {
     return {
       i: 0,
       next() {
-        if (this.i < this.size) {
-          this.i++;
           const list = this.table[this.i];
+          this.i++;
           if (!list) return;
           const item = list.head;
           do {
             return { value: item.data, done: false };
             item = item.next;
           } while (item);
-        }
         return { value: undefined, done: true };
       },
     };
   }
 }
+
+//итератор сделать через поиск элемента и при нахождении i++
 
 module.exports = { HashTable };
