@@ -129,19 +129,23 @@ class HashTable {
     // console.log(newMap)
     return newMap;
   }
-  
+
   [Symbol.iterator]() {
+    console.log(this.table);
+
     return {
       i: 0,
+      j: 0,
       next() {
-          const list = this.table[this.i];
-          this.i++;
-          if (!list) return;
-          const item = list.head;
-          do {
-            return { value: item.data, done: false };
-            item = item.next;
-          } while (item);
+        console.log(this.table);
+        const list = this.table[this.j];
+        this.j++;
+        if (!list) return;
+        const item = list.head;
+        while (item) {
+          return { value: item.data, done: false };
+          item = item.next;
+        }
         return { value: undefined, done: true };
       },
     };
