@@ -131,22 +131,25 @@ class HashTable {
   }
 
   [Symbol.iterator]() {
-    console.log(this.table);
-
+    
     return {
+      table: this.table,
       i: 0,
       j: 0,
       next() {
-        console.log(this.table);
-        const list = this.table[this.j];
+        if(this.j === 10) return { value: undefined, done: true };
+        const list = this.table[this.j];   
+        console.log(list)
         this.j++;
-        if (!list) return;
-        const item = list.head;
+        if (!list) this.next();
+        console.log(list, 1)        //list for some reason is undefined here
+        let item = list.head;
         while (item) {
-          return { value: item.data, done: false };
+          const data = item.data
           item = item.next;
+          return { value: data, done: false };
         }
-        return { value: undefined, done: true };
+        console.log(this.j)
       },
     };
   }
