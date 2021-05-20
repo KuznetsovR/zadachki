@@ -68,7 +68,6 @@ function isArray(arg) {
 }
 
 class HashTable {
-  //Load factor < 8
   constructor(size = 10) {
     this.size = size;
     this.table = new Array(this.size);
@@ -126,7 +125,6 @@ class HashTable {
         newMap.set(iterable[i].key, iterable[i].value);
       } else throw Error;
     }
-    // console.log(newMap)
     return newMap;
   }
 
@@ -134,10 +132,12 @@ class HashTable {
     
     return {
       table: this.table,
-      i: 0,
+      size: this.size,
       j: 0,
       next() {
-        if(this.j === 10) return { value: undefined, done: true };
+        if(this.j === this.size){
+          return { value: undefined, done: true }
+        }
         const list = this.table[this.j];   
         this.j++;
         if (!list) {
@@ -149,12 +149,9 @@ class HashTable {
           item = item.next;
           return { value: data, done: false };
         }
-        console.log(this.j)
       },
     };
   }
 }
-
-//итератор сделать через поиск элемента и при нахождении i++
 
 module.exports = { HashTable };

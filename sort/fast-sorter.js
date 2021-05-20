@@ -50,6 +50,4 @@ class FastSorter {
 }
 
 module.exports = FastSorter;
-const sorter = new FastSorter((a, b) => a - b);
-const arr2 = [-1, 3, 1, 2];
-console.log(sorter.sort(arr2));
+
