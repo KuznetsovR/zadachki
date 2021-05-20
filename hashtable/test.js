@@ -49,6 +49,6 @@ describe('HashTable', () => {
       assert.equal(deleted, true);
     }
     // Did we iterate over all keys?
-    assert.equal(Object.keys(keyvalues), 0);
+    assert.equal(Object.keys(keyvalues).length, 0);
   });
 });

@@ -139,10 +139,10 @@ class HashTable {
       next() {
         if(this.j === 10) return { value: undefined, done: true };
         const list = this.table[this.j];   
-        console.log(list)
         this.j++;
-        if (!list) this.next();
-        console.log(list, 1)        //list for some reason is undefined here
+        if (!list) {
+          return this.next();
+        }
         let item = list.head;
         while (item) {
           const data = item.data
